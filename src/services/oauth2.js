@@ -24,7 +24,7 @@ export class Service {
   oauthCallback(req, accessToken, refreshToken, profile, done) {
     let app = this.app;
     const options = this.options;
-    const params = {
+    const params = options.buildParams? options.buildParams( profile ) : {
       query: {
         // facebookId: profile.id
         [`${options.provider}Id`]: profile.id
