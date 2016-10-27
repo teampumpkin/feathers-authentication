@@ -60,7 +60,7 @@ export class Service {
 
           debug(`Updating user: ${id}`);
 
-          return app.service(options.userEndpoint).patch(id, data).then(updatedUser => {
+          return app.service(options.userEndpoint).patch(id, data, req.params).then(updatedUser => {
             return done(null, updatedUser);
           }).catch(done);
         }
@@ -68,7 +68,7 @@ export class Service {
         debug(`Creating new user with ${options.provider}Id: ${profile.id}`);
 
         // No user found so we need to create one.
-        return app.service(options.userEndpoint).create(data).then(user => {
+        return app.service(options.userEndpoint).create(data, req.params).then(user => {
           debug(`Created new user: ${user[options.idField]}`);
 
           return done(null, user);
